@@ -20,6 +20,10 @@ export class FormGroupComponent {
     lastName: new FormControl(this.person.lastName),
   });
 
+  ngOnInit() {
+    this.profileForm.get('firstName')?.setValue("Mamasita");
+  }
+
   onSubmit(): void {
     console.warn(this.profileForm.value);
   }
