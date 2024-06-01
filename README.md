@@ -26,3 +26,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 # forms-playground
+
+## Prettier Configuration
+
+This project uses the following Prettier configuration:
+
+- `singleQuote: true` - Use single quotes instead of double quotes
+- `semi: true` - Use semicolons at the end of statements
+- `trailingComma: 'es5'` - Add trailing commas where valid in ES5 (objects, arrays, etc.)
+- `printWidth: 100` - Increase line width for better readability
+- `tabWidth: 2` - Use 2 spaces per tab
+- `bracketSpacing: true` - Print spaces between brackets in object literals
+- `arrowParens: 'always'` - Always include parentheses around arrow function parameters
+- `endOfLine: 'lf'` - Ensure consistent line endings (LF)
