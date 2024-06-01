@@ -11,9 +11,8 @@ describe('FormGroupComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormGroupComponent],
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FormGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -34,10 +33,9 @@ describe('FormGroupComponent', () => {
   });
 
   it('should update the value in the control', () => {
-    component.profileForm.get('firstName')?.setValue("Mamasita");
+    component.profileForm.get('firstName')?.setValue('Mamasita');
     fixture.detectChanges();
     const input = fixture.nativeElement.querySelector('input');
     expect(input.value).toBe('Mamasita');
   });
-
 });

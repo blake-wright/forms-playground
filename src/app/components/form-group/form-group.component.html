@@ -1,44 +1,65 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-  <label for="first-name">First Name: </label>
-  <input type="text" id="first-name" formControlName="firstName">
-
-  @if (firstName) {
-
-    @if (firstName.hasError('required')) {
-      <p>Name is required.</p>
+  <div class="mb-4 flex items-center">
+    <label for="first-name" class="w-32">First Name: </label>
+    <input pInputText type="text" id="first-name" formControlName="firstName" />
+  </div>
+  <div> 
+    @if (firstName && firstName.invalid && (firstName.dirty || firstName.touched)) {
+      @if (firstName.hasError('required')) {
+        <p class="text-red-500">Name is required.</p>
+      }
+  
+      @if (firstName.hasError('minlength')) {
+        <p class="text-red-500">Name must be at least 2 characters.</p>
+      }
     }
+  </div>
 
-    @if (firstName.hasError('minlength')) {
-      <p>Name must be at least 3 characters.</p>
+  <div class="mb-4 flex items-center">
+    <label for="last-name" class="w-32">Last Name: </label>
+    <input pInputText type="text" id="last-name" formControlName="lastName" />
+  </div>
+
+  <div class="mb-4 flex items-center">
+    <label for="birthday" class="w-32">Birthday: </label>
+    <!-- if dirty apply ng invalid -->
+    <p-calendar formControlName="birthday" id="birthday" [showClear]="true" [ngClass]="{
+      'ng-dirty': birthday && birthday.touched,
+    }"/>
+  </div>
+  <div>
+    @if (birthday && birthday.invalid && (birthday.dirty || birthday.touched)) {
+      @if (birthday.hasError('required')) {
+        <p class="text-red-500">Birthday is required.</p>
+      }
+  
+      @if (birthday.hasError('forbiddenFutureDate')) {
+        <p class="text-red-500">Date has to be in the past!</p>
+      }
     }
-  }
+  </div>
 
-  <br>
-  <br>
-
-  <label for="last-name">Last Name: </label>
-  <input type="text" id="last-name" formControlName="lastName">
-
-  <br>
-  <br>
-
-  <p-calendar formControlName="birthday" [showClear]="true"></p-calendar>
-
-  @if (birthday && birthday.invalid && (birthday.dirty || birthday.touched)) {
-    
-    @if (birthday.hasError('required')) {
-      <p>Birthday is required.</p>
-    }
-
-    @if (birthday.hasError('forbiddenFutureDate')) {
-      <p>Date has to be in the past!</p>
-    }
-  }
-
-  <br>
-  <br>
+<div>
+  <div class="card flex justify-content-center">
+    <label for="category" class="me-4">Category: </label>
+    <div *ngFor="let category of categories" class="me-4">
+        <p-radioButton 
+            [inputId]="category.key" 
+            [value]="category" 
+            formControlName="category"/>
+        <label [for]="category.key" class="me-2">
+            {{ category.name }}
+        </label>
+    </div>
+</div>
+@if (category && category.invalid && (category.dirty || category.touched)) {
+@if (category.hasError('forbiddenCategoryOnWeekend')) {
+<p class="text-red-500">Because you were born on a weekend, you can't pick Accounting.</p>
+}
+}
+</div>
 
   <p>Complete the form to enable button.</p>
-  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+  <p-button type="submit" [disabled]="!profileForm.valid">Submit</p-button>
 </form>

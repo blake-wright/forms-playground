@@ -9,7 +9,7 @@ import { FormGroupComponent } from './components/form-group/form-group.component
   standalone: true,
   imports: [CommonModule, RouterOutlet, FormComponent, FormGroupComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'test-import';
